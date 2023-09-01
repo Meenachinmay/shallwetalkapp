@@ -1,0 +1,16 @@
+html {
+  scroll-behavior: smooth;
+}
+
+#tsparticles {
+  height: 100%;
+  width: 100%;
+  background: rgb(252,74,74);
+  background: linear-gradient(19deg, rgba(252,74,74,1) 0%, rgba(255,255,255,1) 100%);
+}
+
+.type-effect {
+  font-size: 150px;
+  color: red;
+  transition: ease-in-out;
+}
