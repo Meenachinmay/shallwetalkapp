@@ -205,6 +205,7 @@ const Login: React.FC<LoginProps> = () => {
           setEmail(window.btoa(doc.data().spaceId));
           setTest(true);
           setFetchingSpace(false);
+          return;
         }
       });
     }

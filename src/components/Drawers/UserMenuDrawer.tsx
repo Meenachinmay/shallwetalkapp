@@ -1,15 +1,24 @@
 import {
-  Button, Drawer,
-  DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader,
-  DrawerOverlay, Flex, IconButton, Tooltip, useDisclosure
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  Flex,
+  IconButton,
+  Tooltip,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { signOut } from "firebase/auth";
 import {
   collection,
   deleteDoc,
   doc,
-  getDocs, query,
-  where
+  getDocs,
+  query,
+  where,
 } from "firebase/firestore";
 import { useRef, useState } from "react";
 import { HiUser } from "react-icons/hi";
@@ -73,16 +82,22 @@ const UserMenuDrawer = () => {
       deleteDoc(doc.ref);
     });
 
-    onClose()
+    onClose();
     setLoading(false);
     signOut(auth);
     localStorage.removeItem("recoil-persist");
     setLoaderModelState({ open: false });
   };
 
-  // method to handle - when we click on logged in user name
+  // METHOD TO REDIRECT USER TO PROFILE PAGE - WHERE USE CAN SEE PROFILE AND UPDATE IT AS WELL
   const handleUserNameClick = () => {
     navigate(`/profile/${currentUser.id}`);
+  };
+
+  // REDIRECT THE USER TO VIRTUAL SPACE FROM ANTWHERE IN THE APP
+  const handleUserNavigationToVirtualSpace = () => {
+    navigate(`/dashboard/${window.btoa(currentUser.spaceId)}`);
+    console.log('current space id', currentUser.spaceId)
   };
 
   return (
@@ -114,7 +129,12 @@ const UserMenuDrawer = () => {
           <DrawerHeader>{currentUserProfile.name}</DrawerHeader>
           <DrawerBody>
             <>
-              <Flex alignItems='center' flexDir={'column'} gap={'10px'} justifyContent='space-between'>
+              <Flex
+                alignItems="center"
+                flexDir={"column"}
+                gap={"10px"}
+                justifyContent="space-between"
+              >
                 <Button
                   onClick={() => handleUserNameClick()}
                   bg="red.500"
@@ -132,7 +152,7 @@ const UserMenuDrawer = () => {
                   プロフィールへ
                 </Button>
                 <Button
-                  onClick={() => navigate(`/dashboard/${window.btoa(currentUser.spaceId)}`)}
+                  onClick={handleUserNavigationToVirtualSpace}
                   bg="red.500"
                   color="white"
                   _hover={{
